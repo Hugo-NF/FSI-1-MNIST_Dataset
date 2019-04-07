@@ -1,13 +1,15 @@
 import cv2 as cv
 import numpy as np
 
-class Features:
-    "This class is intended to extract features from images"
+
+class Metrics:
+
+    """This class is intended to extract features from images"""
 
     def __init__(self, array, rows=28, cols=28, t=30):
         self.array = array
         self.img = array.reshape(rows, cols)
-        self.thresh = cv.threshold(self.img, t, 255, 0)
+        self.ret, self.thresh = cv.threshold(self.img, t, 255, 0)
         self.contours, self.hierarchy = cv.findContours(self.thresh, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
         self.cnt = self.contours[0]
         self.perimeter = cv.arcLength(self.cnt, True)
