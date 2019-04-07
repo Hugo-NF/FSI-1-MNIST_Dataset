@@ -1,22 +1,20 @@
-import sys
-import scipy
 import pandas as pd
-import sklearn
 import numpy as np
 import matplotlib.pyplot as plt
 
-from sklearn import svm, datasets
-from sklearn.model_selection import train_test_split
 from sklearn.utils.multiclass import unique_labels
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import classification_report
 from sklearn.metrics import accuracy_score
 from sklearn.neighbors import KNeighborsClassifier
 
+import features as ft
+
 neigh = KNeighborsClassifier(n_neighbors=3)
 train_X = None
 train_y = None
 last_classifier_used = None
+last_features_used = None
 
 
 def set_n_neighbors(n):
@@ -28,6 +26,49 @@ def basic_classifier(t_X, t_y):
     global train_X, train_y, last_classifier_used
     last_classifier_used = basic_classifier
     train_X = t_X
+    train_y = t_y
+    neigh.fit(train_X, train_y)
+
+
+# index_features_function_value:
+#   0 - centroid
+#   1 - axis_of_least_inertia
+#   2 - eccentricity
+#   3 - circularity_ratio
+#   4 - rectangularity
+#   5 - convexity
+#   6 - solidity
+def classifier_with_features(t_X, t_y, index_features_functions=None):
+    global last_features_used, last_classifier_used
+
+    last_classifier_used = classifier_with_features
+
+    new_t_X = [[] for i in range(len(t_X))]
+
+    if index_features_functions != None:
+        last_features_used = index_features_functions
+
+    for index, X in enumerate(t_X):
+
+        feature = ft.Metrics(X)
+        arr_features_functions = [feature.centroid,
+                                  feature.axis_of_least_inertia,
+                                  feature.eccentricity,
+                                  feature.circularity_ratio,
+                                  feature.rectangularity,
+                                  feature.convexity,
+                                  feature.solidity]
+
+        for index_feature_function in index_features_functions:
+            value = arr_features_functions[index_feature_function](X)
+            if type(value) == int or type(value) == float:
+                value = [value]
+            elif type(value) == np.ndarray:
+                value = value.tolist()
+
+            new_t_X[index] = new_t_X[index] + value
+
+    train_X = new_t_X
     train_y = t_y
     neigh.fit(train_X, train_y)
 
@@ -46,7 +87,7 @@ def show_accuracy(test_X, test_y):
     print(accuracy_score(test_y, predicts))
 
 
-def show_confusion_matrix(test_X, test_y, name_file='confusion_matrix.png'):
+def show_confusion_matrix(test_X, test_y, name_file='knn_confusion_matrix.png'):
     labels = np.unique(test_y)
     predicts = neigh.predict(test_X)
     plot_confusion_matrix(test_y, predicts, labels, title=name_file.replace('.png', ''))
@@ -63,19 +104,24 @@ def show_classification_report(test_X, test_y):
 def plot_accuracy_per_neighbors(test_X, test_y, neighbor_range):
     train_error = np.zeros(len(neighbor_range))
     test_error = np.zeros(len(neighbor_range))
+    limit = 2000
+    labels = np.unique(test_y[:limit])
 
     for index, neighbor in enumerate(neighbor_range):
         set_n_neighbors(neighbor)
         last_classifier_used(train_X, train_y)
 
-        predicts = neigh.predict(train_X[:2000])
-        train_error[index] = 1 - accuracy_score(train_y[:2000], predicts)
+        predicts = neigh.predict(train_X[:limit])
+        train_error[index] = 1 - accuracy_score(train_y[:limit], predicts)
 
-        predicts = neigh.predict(test_X[:2000])
-        test_error[index] = 1 - accuracy_score(test_y[:2000], predicts)
+        predicts = neigh.predict(test_X[:limit])
+        test_error[index] = 1 - accuracy_score(test_y[:limit], predicts)
 
         # Plot confusion matrix
-        show_confusion_matrix(test_X, test_y, 'Confusion_matrix_{}.png'.format(neighbor))
+        plot_confusion_matrix(test_y[:limit], predicts, labels,
+                              title='Confusion Matriz - {} Neighbors'.format(neighbor))
+        plt.savefig('knn_confusion_matrix_{}.png'.format(neighbor), dpi=300)
+        plt.show()
 
     # plot train_error and test_error in the graph
     df = pd.DataFrame({'x': neighbor_range, 'train-error': train_error, 'test-error': test_error})
