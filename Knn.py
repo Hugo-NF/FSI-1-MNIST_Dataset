@@ -32,7 +32,7 @@ def basic_classifier(t_X, t_y):
 
 # index_features_function_value:
 #   0 - centroid
-#   1 - axis_of_least_inertia
+#   1 - axis_least_inertia
 #   2 - eccentricity
 #   3 - circularity_ratio
 #   4 - rectangularity
@@ -52,7 +52,7 @@ def classifier_with_features(t_X, t_y, index_features_functions=None):
 
         feature = ft.Metrics(X)
         arr_features_functions = [feature.centroid,
-                                  feature.axis_of_least_inertia,
+                                  feature.axis_least_inertia,
                                   feature.eccentricity,
                                   feature.circularity_ratio,
                                   feature.rectangularity,
