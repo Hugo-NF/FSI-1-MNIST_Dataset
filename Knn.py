@@ -39,57 +39,40 @@ def basic_classifier(t_X, t_y):
 #   5 - convexity
 #   6 - solidity
 def classifier_with_features(t_X, t_y, index_features_functions=None):
-    global last_features_used, last_classifier_used
+    global train_X, train_y, last_features_used, last_classifier_used
 
     last_classifier_used = classifier_with_features
-
-    new_t_X = [[] for i in range(len(t_X))]
 
     if index_features_functions != None:
         last_features_used = index_features_functions
 
-    for index, X in enumerate(t_X):
-
-        feature = ft.Metrics(X)
-        arr_features_functions = [feature.centroid,
-                                  feature.axis_least_inertia,
-                                  feature.eccentricity,
-                                  feature.circularity_ratio,
-                                  feature.rectangularity,
-                                  feature.convexity,
-                                  feature.solidity]
-
-        for index_feature_function in index_features_functions:
-            value = arr_features_functions[index_feature_function]()
-            if type(value) == int or type(value) == float:
-                value = [value]
-            elif type(value) == np.ndarray:
-                value = value.tolist()
-
-            new_t_X[index] = new_t_X[index] + value
-
-    train_X = new_t_X
+    train_X = t_X
     train_y = t_y
-    neigh.fit(train_X, train_y)
+    neigh.fit(get_new_X(train_X), train_y)
 
 
-def show_predict(X):
-    predicts = neigh.predict(X)
-    print(predicts)
+def get_predict(X):
+    if last_classifier_used == classifier_with_features:
+        return neigh.predict(get_new_X(X))
+    else:
+        return neigh.predict(X)
 
 
-def show_predict_proba(X):
-    print(neigh.predict_proba(X))
+def get_predict_proba(X):
+    if last_classifier_used == classifier_with_features:
+        return neigh.predict_proba(get_new_X(X))
+    else:
+        return neigh.predict_proba(X)
 
 
 def show_accuracy(test_X, test_y):
-    predicts = neigh.predict(test_X)
+    predicts = get_predict(test_X)
     print(accuracy_score(test_y, predicts))
 
 
 def show_confusion_matrix(test_X, test_y, name_file='knn_confusion_matrix.png'):
     labels = np.unique(test_y)
-    predicts = neigh.predict(test_X)
+    predicts = get_predict(test_X)
     plot_confusion_matrix(test_y, predicts, labels, title=name_file.replace('.png', ''))
     plt.savefig(name_file, dpi=300)
     plt.show()
@@ -97,31 +80,32 @@ def show_confusion_matrix(test_X, test_y, name_file='knn_confusion_matrix.png'):
 
 def show_classification_report(test_X, test_y):
     labels = np.unique(test_y)
-    predicts = neigh.predict(test_X)
+    predicts = get_predict(test_X)
     print(classification_report(test_y, predicts, labels))
 
 
-def plot_accuracy_per_neighbors(test_X, test_y, neighbor_range):
+def plot_accuracy_per_neighbors(test_X, test_y, neighbor_range, plot_confusion=True, limit=2000):
     train_error = np.zeros(len(neighbor_range))
     test_error = np.zeros(len(neighbor_range))
-    limit = 2000
     labels = np.unique(test_y[:limit])
 
     for index, neighbor in enumerate(neighbor_range):
         set_n_neighbors(neighbor)
         last_classifier_used(train_X, train_y)
 
-        predicts = neigh.predict(train_X[:limit])
+        predicts = get_predict(train_X[:limit])
         train_error[index] = 1 - accuracy_score(train_y[:limit], predicts)
 
-        predicts = neigh.predict(test_X[:limit])
+        predicts = get_predict(test_X[:limit])
         test_error[index] = 1 - accuracy_score(test_y[:limit], predicts)
 
         # Plot confusion matrix
-        plot_confusion_matrix(test_y[:limit], predicts, labels,
-                              title='Confusion Matriz - {} Neighbors'.format(neighbor))
-        plt.savefig('knn_confusion_matrix_{}.png'.format(neighbor), dpi=300)
-        plt.show()
+        if plot_confusion:
+            plot_confusion_matrix(test_y[:limit], predicts, labels,
+                                  title='Confusion Matriz - {} Neighbors'.format(neighbor))
+
+            plt.savefig('knn_confusion_matrix_{}.png'.format(neighbor), dpi=300)
+            plt.show()
 
     # plot train_error and test_error in the graph
     df = pd.DataFrame({'x': neighbor_range, 'train-error': train_error, 'test-error': test_error})
@@ -133,6 +117,31 @@ def plot_accuracy_per_neighbors(test_X, test_y, neighbor_range):
     plt.savefig('accuracy_per_neighbors.png', dpi=300)
     plt.show()
 
+
+def get_new_X(old_X):
+    new_t_X = [[] for i in range(len(old_X))]
+
+    for index, X in enumerate(old_X):
+
+        feature = ft.Metrics(X)
+        arr_features_functions = [feature.centroid,
+                                  feature.axis_least_inertia,
+                                  feature.eccentricity,
+                                  feature.circularity_ratio,
+                                  feature.rectangularity,
+                                  feature.convexity,
+                                  feature.solidity]
+
+        for index_feature_function in last_features_used:
+            value = arr_features_functions[index_feature_function]()
+            if type(value) == int or type(value) == float:
+                value = [value]
+            elif type(value) == np.ndarray:
+                value = value.tolist()
+
+            new_t_X[index] = new_t_X[index] + value
+
+    return new_t_X
 
 # Function copied from: scikit-learn: plot_confusion_matrix
 def plot_confusion_matrix(y_true, y_pred, classes,

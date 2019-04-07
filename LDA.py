@@ -37,12 +37,51 @@ def classifier_with_features(t_X, t_y, index_features_functions=None):
 
     last_classifier_used = classifier_with_features
 
-    new_t_X = [[] for i in range(len(t_X))]
-
     if index_features_functions != None:
         last_features_used = index_features_functions
 
-    for index, X in enumerate(t_X):
+    train_X = get_new_X(t_X)
+    train_y = t_y
+    clf.fit(train_X, train_y)
+
+
+def get_predict(X):
+    if last_classifier_used == classifier_with_features:
+        return clf.predict(get_new_X(X))
+    else:
+        return clf.predict(X)
+
+
+def get_predict_proba(X):
+    if last_classifier_used == classifier_with_features:
+        return clf.predict_proba(get_new_X(X))
+    else:
+        return clf.predict_proba(X)
+
+
+def show_accuracy(test_X, test_y):
+    predicts = get_predict(test_X)
+    print(accuracy_score(test_y, predicts))
+
+
+def show_confusion_matrix(test_X, test_y, name_file='lda_confusion_matrix.png'):
+    labels = np.unique(test_y)
+    predicts = get_predict(test_X)
+    plot_confusion_matrix(test_y, predicts, labels, title=name_file.replace('.png', ''))
+    plt.savefig(name_file, dpi=300)
+    plt.show()
+
+
+def show_classification_report(test_X, test_y):
+    labels = np.unique(test_y)
+    predicts = get_predict(test_X)
+    print(classification_report(test_y, predicts, labels))
+    
+
+def get_new_X(old_X):
+    new_t_X = [[] for i in range(len(old_X))]
+
+    for index, X in enumerate(old_X):
 
         feature = ft.Metrics(X)
         arr_features_functions = [feature.centroid,
@@ -53,7 +92,7 @@ def classifier_with_features(t_X, t_y, index_features_functions=None):
                                   feature.convexity,
                                   feature.solidity]
 
-        for index_feature_function in index_features_functions:
+        for index_feature_function in last_features_used:
             value = arr_features_functions[index_feature_function]()
             if type(value) == int or type(value) == float:
                 value = [value]
@@ -62,39 +101,9 @@ def classifier_with_features(t_X, t_y, index_features_functions=None):
 
             new_t_X[index] = new_t_X[index] + value
 
-    train_X = new_t_X
-    train_y = t_y
-    clf.fit(train_X, train_y)
+    return new_t_X
 
 
-def show_predict(X):
-    predicts = clf.predict(X)
-    print(predicts)
-
-
-def show_predict_proba(X):
-    print(clf.predict_proba(X))
-
-
-def show_accuracy(test_X, test_y):
-    predicts = clf.predict(test_X)
-    print(accuracy_score(test_y, predicts))
-
-
-def show_confusion_matrix(test_X, test_y, name_file='lda_confusion_matrix.png'):
-    labels = np.unique(test_y)
-    predicts = clf.predict(test_X)
-    plot_confusion_matrix(test_y, predicts, labels, title=name_file.replace('.png', ''))
-    plt.savefig(name_file, dpi=300)
-    plt.show()
-
-
-def show_classification_report(test_X, test_y):
-    labels = np.unique(test_y)
-    predicts = clf.predict(test_X)
-    print(classification_report(test_y, predicts, labels))
-    
-    
 # Function copied from: scikit-learn: plot_confusion_matrix
 def plot_confusion_matrix(y_true, y_pred, classes,
                           normalize=False,
