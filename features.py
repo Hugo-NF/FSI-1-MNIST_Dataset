@@ -11,7 +11,7 @@ class Metrics:
         self.img = array.reshape(rows, cols)
         self.ret, self.thresh = cv.threshold(self.img, t, 255, 0)
         self.contours, self.hierarchy = cv.findContours(self.thresh, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
-        self.cnt = self.contours[0]
+        self.cnt = max(self.contours, key=len)
         self.perimeter = cv.arcLength(self.cnt, True)
         self.area = cv.contourArea(self.cnt)
         self.hull = cv.convexHull(self.cnt)
