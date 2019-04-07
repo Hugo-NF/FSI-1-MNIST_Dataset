@@ -60,7 +60,7 @@ def classifier_with_features(t_X, t_y, index_features_functions=None):
                                   feature.solidity]
 
         for index_feature_function in index_features_functions:
-            value = arr_features_functions[index_feature_function](X)
+            value = arr_features_functions[index_feature_function]()
             if type(value) == int or type(value) == float:
                 value = [value]
             elif type(value) == np.ndarray:
