@@ -68,7 +68,7 @@ def get_accuracy(test_X, test_y):
 def show_confusion_matrix(test_X, test_y, name_file='lda_confusion_matrix.png'):
     labels = np.unique(test_y)
     predicts = get_predict(test_X)
-    plot_confusion_matrix(test_y, predicts, labels, title=name_file.replace('.png', ''))
+    plot_confusion_matrix(test_y, predicts, labels, normalize=True, title=name_file.replace('.png', ''))
     plt.savefig(name_file, dpi=300)
     plt.show()
 

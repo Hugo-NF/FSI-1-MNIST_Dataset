@@ -1,0 +1,24 @@
+KNN-3-basic-features:
+Time Train-60000 (s): 61.88080835342407
+Time Test-10000 (s):  1254.924382686615
+Accuracy: 0.9705
+
+KNN-3-best-features:
+Time Train-60000 (s): 4.8184144496917725
+Time Test-10000 (s):  1.6305193901062012
+Accuracy: 0.5539
+
+KNN-60-best-features:
+Time Train-60000 (s): 4.543482542037964
+Time Test-10000 (s):  2.1381165981292725
+Accuracy: 0.608
+
+LDA-basic-features:
+Time Train-60000 (s): 30.597604513168335
+Time Test-10000 (s):  0.07756519317626953
+Accuracy: 0.873 
+
+LDA-best-features:
+Time Train-60000 (s): 10.521293640136719
+Time Test-10000 (s):  1.6891241073608398
+Accuracy: 0.651

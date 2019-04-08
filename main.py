@@ -53,3 +53,95 @@ def show_number_image(img):
 #            'accuracy': accuracy})
 #
 # print(max(accuracy_per_combinations))
+
+
+# Test best features time to train and test, and accuracy:
+import time
+
+
+# Get statics for Knn, 3 neighbors and using best features for knn-3
+print("KNN-3-best-features:")
+knn.set_n_neighbors(3)
+
+train_start_time = time.time()
+knn.classifier_with_features(train_images, train_labels, [2, 3, 4, 5, 6])
+train_finish_time = time.time()
+
+test_start_time = time.time()
+accuracy = knn.get_accuracy(test_images, test_labels)
+test_finish_time = time.time()
+
+print("Time Train-60000 (s): {}".format(train_finish_time - train_start_time))
+print("Time Test-10000 (s):  {}".format(test_finish_time - test_start_time))
+print("Accuracy: {}".format(accuracy))
+knn.show_confusion_matrix(test_images, test_labels, "KNN-3-best-features-confusion-matrix.png")
+
+
+# Get statics for Knn, 60 neighbors and using best features for knn-60
+print("KNN-60-best-features:")
+knn.set_n_neighbors(60)
+
+train_start_time = time.time()
+knn.classifier_with_features(train_images, train_labels, [2, 4, 5, 6])
+train_finish_time = time.time()
+
+test_start_time = time.time()
+accuracy = knn.get_accuracy(test_images, test_labels)
+test_finish_time = time.time()
+
+print("Time Train-60000 (s): {}".format(train_finish_time - train_start_time))
+print("Time Test-10000 (s):  {}".format(test_finish_time - test_start_time))
+print("Accuracy: {}".format(accuracy))
+knn.show_confusion_matrix(test_images, test_labels, "KNN-60-best-features-confusion-matrix.png")
+
+
+# Get statics for LDA using image pixels as data
+print("LDA-basic-features:")
+
+train_start_time = time.time()
+lda.basic_classifier(train_images, train_labels)
+train_finish_time = time.time()
+
+test_start_time = time.time()
+accuracy = lda.get_accuracy(test_images, test_labels)
+test_finish_time = time.time()
+
+print("Time Train-60000 (s): {}".format(train_finish_time - train_start_time))
+print("Time Test-10000 (s):  {}".format(test_finish_time - test_start_time))
+print("Accuracy: {}".format(accuracy))
+lda.show_confusion_matrix(test_images, test_labels, "LDA-basic-features-confusion-matrix.png")
+
+
+# Get statics for LDA using best features
+print("LDA-best-features:")
+
+train_start_time = time.time()
+lda.classifier_with_features(train_images, train_labels, [0, 1, 2, 3, 4, 5, 6])
+train_finish_time = time.time()
+
+test_start_time = time.time()
+accuracy = lda.get_accuracy(test_images, test_labels)
+test_finish_time = time.time()
+
+print("Time Train-60000 (s): {}".format(train_finish_time - train_start_time))
+print("Time Test-10000 (s):  {}".format(test_finish_time - test_start_time))
+print("Accuracy: {}".format(accuracy))
+lda.show_confusion_matrix(test_images, test_labels, "LDA-best-features-confusion-matrix.png")
+
+
+# Get statics for Knn, 3 neighbors and using image pixels as data
+print("KNN-3-basic-features:")
+knn.set_n_neighbors(3)
+
+train_start_time = time.time()
+knn.basic_classifier(train_images, train_labels)
+train_finish_time = time.time()
+
+test_start_time = time.time()
+accuracy = knn.get_accuracy(test_images, test_labels)
+test_finish_time = time.time()
+
+print("Time Train-60000 (s): {}".format(train_finish_time - train_start_time))
+print("Time Test-10000 (s):  {}".format(test_finish_time - test_start_time))
+print("Accuracy: {}".format(accuracy))
+knn.show_confusion_matrix(test_images, test_labels, "KNN-3-basic-features-confusion-matrix.png")
