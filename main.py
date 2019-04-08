@@ -32,3 +32,23 @@ def show_numbers_image(n_rep, imgs, labels):
 def show_number_image(img):
         plt.imshow(img.reshape(28, 28), cmap='gray', vmin=0, vmax=255)
         plt.show()
+
+
+# Accuracy per features combinations
+from itertools import combinations
+
+data = range(7)
+arr_combinations = []
+accuracy_per_combinations = []
+
+for i in range(1, len(data)+1):
+    arr_combinations = arr_combinations + list(combinations(data, i))
+
+for index, comb in enumerate(arr_combinations):
+    knn.classifier_with_features(train_images, train_labels, list(comb))
+    accuracy = knn.get_accuracy(test_images, test_labels)
+    accuracy_per_combinations.append((accuracy, comb))
+    print({'combination': comb,
+           'accuracy': accuracy})
+
+print(max(accuracy_per_combinations))

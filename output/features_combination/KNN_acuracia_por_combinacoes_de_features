@@ -1,0 +1,129 @@
+{'combination': (0), 'accuracy': 0.1018}
+{'combination': (1), 'accuracy': 0.2168}
+{'combination': (2), 'accuracy': 0.1967}
+{'combination': (3), 'accuracy': 0.3255}
+{'combination': (4), 'accuracy': 0.2381}
+{'combination': (5), 'accuracy': 0.2893}
+{'combination': (6), 'accuracy': 0.293}
+{'combination': (0, 1), 'accuracy': 0.218}
+{'combination': (0, 2), 'accuracy': 0.1972}
+{'combination': (0, 3), 'accuracy': 0.2827}
+{'combination': (0, 4), 'accuracy': 0.2275}
+{'combination': (0, 5), 'accuracy': 0.2981}
+{'combination': (0, 6), 'accuracy': 0.2737}
+{'combination': (1, 2), 'accuracy': 0.217}
+{'combination': (1, 3), 'accuracy': 0.223}
+{'combination': (1, 4), 'accuracy': 0.2171}
+{'combination': (1, 5), 'accuracy': 0.2168}
+{'combination': (1, 6), 'accuracy': 0.2171}
+{'combination': (2, 3), 'accuracy': 0.3685}
+{'combination': (2, 4), 'accuracy': 0.337}
+{'combination': (2, 5), 'accuracy': 0.3871}
+{'combination': (2, 6), 'accuracy': 0.3436}
+{'combination': (3, 4), 'accuracy': 0.3485}
+{'combination': (3, 5), 'accuracy': 0.4281}
+{'combination': (3, 6), 'accuracy': 0.392}
+{'combination': (4, 5), 'accuracy': 0.4193}
+{'combination': (4, 6), 'accuracy': 0.3846}
+{'combination': (5, 6), 'accuracy': 0.4174}
+{'combination': (0, 1, 2), 'accuracy': 0.2179}
+{'combination': (0, 1, 3), 'accuracy': 0.2243}
+{'combination': (0, 1, 4), 'accuracy': 0.2183}
+{'combination': (0, 1, 5), 'accuracy': 0.2181}
+{'combination': (0, 1, 6), 'accuracy': 0.2181}
+{'combination': (0, 2, 3), 'accuracy': 0.3548}
+{'combination': (0, 2, 4), 'accuracy': 0.3291}
+{'combination': (0, 2, 5), 'accuracy': 0.3895}
+{'combination': (0, 2, 6), 'accuracy': 0.3434}
+{'combination': (0, 3, 4), 'accuracy': 0.3343}
+{'combination': (0, 3, 5), 'accuracy': 0.4317}
+{'combination': (0, 3, 6), 'accuracy': 0.3958}
+{'combination': (0, 4, 5), 'accuracy': 0.4223}
+{'combination': (0, 4, 6), 'accuracy': 0.3823}
+{'combination': (0, 5, 6), 'accuracy': 0.4253}
+{'combination': (1, 2, 3), 'accuracy': 0.2232}
+{'combination': (1, 2, 4), 'accuracy': 0.217}
+{'combination': (1, 2, 5), 'accuracy': 0.217}
+{'combination': (1, 2, 6), 'accuracy': 0.217}
+{'combination': (1, 3, 4), 'accuracy': 0.2232}
+{'combination': (1, 3, 5), 'accuracy': 0.2231}
+{'combination': (1, 3, 6), 'accuracy': 0.2231}
+{'combination': (1, 4, 5), 'accuracy': 0.217}
+{'combination': (1, 4, 6), 'accuracy': 0.2172}
+{'combination': (1, 5, 6), 'accuracy': 0.2173}
+{'combination': (2, 3, 4), 'accuracy': 0.474}
+{'combination': (2, 3, 5), 'accuracy': 0.4739}
+{'combination': (2, 3, 6), 'accuracy': 0.4404}
+{'combination': (2, 4, 5), 'accuracy': 0.486}
+{'combination': (2, 4, 6), 'accuracy': 0.4647}
+{'combination': (2, 5, 6), 'accuracy': 0.4607}
+{'combination': (3, 4, 5), 'accuracy': 0.4695}
+{'combination': (3, 4, 6), 'accuracy': 0.4576}
+{'combination': (3, 5, 6), 'accuracy': 0.4751}
+{'combination': (4, 5, 6), 'accuracy': 0.4802}
+{'combination': (0, 1, 2, 3), 'accuracy': 0.2246}
+{'combination': (0, 1, 2, 4), 'accuracy': 0.2181}
+{'combination': (0, 1, 2, 5), 'accuracy': 0.2182}
+{'combination': (0, 1, 2, 6), 'accuracy': 0.218}
+{'combination': (0, 1, 3, 4), 'accuracy': 0.2244}
+{'combination': (0, 1, 3, 5), 'accuracy': 0.2246}
+{'combination': (0, 1, 3, 6), 'accuracy': 0.2247}
+{'combination': (0, 1, 4, 5), 'accuracy': 0.2183}
+{'combination': (0, 1, 4, 6), 'accuracy': 0.2184}
+{'combination': (0, 1, 5, 6), 'accuracy': 0.2185}
+{'combination': (0, 2, 3, 4), 'accuracy': 0.4662}
+{'combination': (0, 2, 3, 5), 'accuracy': 0.4686}
+{'combination': (0, 2, 3, 6), 'accuracy': 0.4379}
+{'combination': (0, 2, 4, 5), 'accuracy': 0.4808}
+{'combination': (0, 2, 4, 6), 'accuracy': 0.4666}
+{'combination': (0, 2, 5, 6), 'accuracy': 0.458}
+{'combination': (0, 3, 4, 5), 'accuracy': 0.4621}
+{'combination': (0, 3, 4, 6), 'accuracy': 0.4674}
+{'combination': (0, 3, 5, 6), 'accuracy': 0.4743}
+{'combination': (0, 4, 5, 6), 'accuracy': 0.4882}
+{'combination': (1, 2, 3, 4), 'accuracy': 0.2232}
+{'combination': (1, 2, 3, 5), 'accuracy': 0.2234}
+{'combination': (1, 2, 3, 6), 'accuracy': 0.2235}
+{'combination': (1, 2, 4, 5), 'accuracy': 0.2171}
+{'combination': (1, 2, 4, 6), 'accuracy': 0.2171}
+{'combination': (1, 2, 5, 6), 'accuracy': 0.2172}
+{'combination': (1, 3, 4, 5), 'accuracy': 0.2232}
+{'combination': (1, 3, 4, 6), 'accuracy': 0.2237}
+{'combination': (1, 3, 5, 6), 'accuracy': 0.2239}
+{'combination': (1, 4, 5, 6), 'accuracy': 0.2175}
+{'combination': (2, 3, 4, 5), 'accuracy': 0.5321}
+{'combination': (2, 3, 4, 6), 'accuracy': 0.5303}
+{'combination': (2, 3, 5, 6), 'accuracy': 0.5316}
+{'combination': (2, 4, 5, 6), 'accuracy': 0.5527}
+{'combination': (3, 4, 5, 6), 'accuracy': 0.5213}
+{'combination': (0, 1, 2, 3, 4), 'accuracy': 0.2247}
+{'combination': (0, 1, 2, 3, 5), 'accuracy': 0.2248}
+{'combination': (0, 1, 2, 3, 6), 'accuracy': 0.225}
+{'combination': (0, 1, 2, 4, 5), 'accuracy': 0.2182}
+{'combination': (0, 1, 2, 4, 6), 'accuracy': 0.2182}
+{'combination': (0, 1, 2, 5, 6), 'accuracy': 0.2184}
+{'combination': (0, 1, 3, 4, 5), 'accuracy': 0.2249}
+{'combination': (0, 1, 3, 4, 6), 'accuracy': 0.2249}
+{'combination': (0, 1, 3, 5, 6), 'accuracy': 0.2252}
+{'combination': (0, 1, 4, 5, 6), 'accuracy': 0.2185}
+{'combination': (0, 2, 3, 4, 5), 'accuracy': 0.5072}
+{'combination': (0, 2, 3, 4, 6), 'accuracy': 0.5233}
+{'combination': (0, 2, 3, 5, 6), 'accuracy': 0.5214}
+{'combination': (0, 2, 4, 5, 6), 'accuracy': 0.5444}
+{'combination': (0, 3, 4, 5, 6), 'accuracy': 0.5136}
+{'combination': (1, 2, 3, 4, 5), 'accuracy': 0.2237}
+{'combination': (1, 2, 3, 4, 6), 'accuracy': 0.2238}
+{'combination': (1, 2, 3, 5, 6), 'accuracy': 0.224}
+{'combination': (1, 2, 4, 5, 6), 'accuracy': 0.2174}
+{'combination': (1, 3, 4, 5, 6), 'accuracy': 0.224}
+{'combination': (2, 3, 4, 5, 6), 'accuracy': 0.5539}
+{'combination': (0, 1, 2, 3, 4, 5), 'accuracy': 0.2252}
+{'combination': (0, 1, 2, 3, 4, 6), 'accuracy': 0.2252}
+{'combination': (0, 1, 2, 3, 5, 6), 'accuracy': 0.2254}
+{'combination': (0, 1, 2, 4, 5, 6), 'accuracy': 0.2184}
+{'combination': (0, 1, 3, 4, 5, 6), 'accuracy': 0.2252}
+{'combination': (0, 2, 3, 4, 5, 6), 'accuracy': 0.5351}
+{'combination': (1, 2, 3, 4, 5, 6), 'accuracy': 0.2241}
+{'combination': (0, 1, 2, 3, 4, 5, 6), 'accuracy': 0.2253}
+'best': (0.5539, (2, 3, 4, 5, 6))
+

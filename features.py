@@ -16,37 +16,42 @@ class Metrics:
         self.area = cv.contourArea(self.cnt)
         self.hull = cv.convexHull(self.cnt)
 
+    # 0
     def centroid(self):
         M = cv.moments(self.thresh)
         cX = int(M["m10"] / M["m00"])
         cY = int(M["m01"] / M["m00"])
         return [cX, cY]
 
+    # 1
     def axis_least_inertia(self):
         line = cv.fitLine(self.cnt, cv.DIST_L2, 0, 0.01, 0.01)
-        return list(map(lambda x:x*100, line))
+        return map(lambda x:x*100, line.flat)
 
-
+    # 2
     def eccentricity(self):
         x, y, w, h = cv.boundingRect(self.cnt)
         return w/h
 
-
+    # 3
     def circularity_ratio(self):
         radius = self.perimeter/(2 * np.pi)
 
         return self.area/((2 * np.pi)*radius)
 
+    # 4
     def rectangularity(self):
         x, y, w, h = cv.boundingRect(self.cnt)
         rec_area = w * h
         return self.area/rec_area
 
+    # 5
     def convexity(self):
         hull_perimeter = cv.arcLength(self.hull, True)
 
         return hull_perimeter/self.perimeter
 
+    # 6
     def solidity(self):
         hull_area = cv.contourArea(self.hull)
         return self.area/hull_area

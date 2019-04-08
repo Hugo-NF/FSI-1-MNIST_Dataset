@@ -65,9 +65,10 @@ def get_predict_proba(X):
         return neigh.predict_proba(X)
 
 
-def show_accuracy(test_X, test_y):
+def get_accuracy(test_X, test_y):
     predicts = get_predict(test_X)
-    print(accuracy_score(test_y, predicts))
+    accuracy = accuracy_score(test_y, predicts)
+    return accuracy_score(test_y, predicts)
 
 
 def show_confusion_matrix(test_X, test_y, name_file='knn_confusion_matrix.png'):
@@ -78,10 +79,10 @@ def show_confusion_matrix(test_X, test_y, name_file='knn_confusion_matrix.png'):
     plt.show()
 
 
-def show_classification_report(test_X, test_y):
+def get_classification_report(test_X, test_y):
     labels = np.unique(test_y)
     predicts = get_predict(test_X)
-    print(classification_report(test_y, predicts, labels))
+    return classification_report(test_y, predicts, labels)
 
 
 def plot_accuracy_per_neighbors(test_X, test_y, neighbor_range, plot_confusion=True, limit=2000):
@@ -139,7 +140,7 @@ def get_new_X(old_X):
             elif type(value) == np.ndarray:
                 value = value.tolist()
 
-            new_t_X[index] = new_t_X[index] + value
+            new_t_X[index] = new_t_X[index] + list(value)
 
     return new_t_X
 
